@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 // @route GET api/auth
 // @desc Get logged in user
 // @access Private
 
 router.get('./', (req, res) => {
-    res.send('Get logged in user');
+  res.json({ msg: 'Get logged in user' });
 });
 
 // @route POST api/auth
@@ -14,7 +14,7 @@ router.get('./', (req, res) => {
 // @access Public
 
 router.post('./', (req, res) => {
-    res.send('Log in user');
+  res.send('Log in user');
 });
 
 module.exports = router;
