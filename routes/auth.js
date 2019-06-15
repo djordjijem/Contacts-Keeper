@@ -5,7 +5,7 @@ const router = express.Router();
 // @desc Get logged in user
 // @access Private
 
-router.get('./', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Get logged in user');
 });
 
@@ -13,7 +13,7 @@ router.get('./', (req, res) => {
 // @desc auth user & get token
 // @access Public
 
-router.post('./', (req, res) => {
+router.post('/', (req, res) => {
     res.send('Log in user');
 });
 

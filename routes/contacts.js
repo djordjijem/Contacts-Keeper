@@ -5,7 +5,7 @@ const router = express.Router();
 // @desc Get users contacts
 // @access Private
 
-router.get('./', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Get all contacts');
 });
 
@@ -13,7 +13,7 @@ router.get('./', (req, res) => {
 // @desc Add new contact
 // @access Private
 
-router.post('./', (req, res) => {
+router.post('/', (req, res) => {
     res.send('Add contact');
 });
 
@@ -21,7 +21,7 @@ router.post('./', (req, res) => {
 // @desc Update contact 
 // @access Private
 
-router.put('./:id', (req, res) => {
+router.put('/:id', (req, res) => {
     res.send('Update contact');
 });
 
@@ -29,7 +29,7 @@ router.put('./:id', (req, res) => {
 // @desc DELETE contact 
 // @access Private
 
-router.delete('./:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     res.send('Delete contact');
 });
 
