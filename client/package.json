@@ -12,6 +12,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-transition": "^1.0.3",
+    "react-transition-group": "^4.1.1",
     "uuid": "^3.3.2"
   },
   "scripts": {
