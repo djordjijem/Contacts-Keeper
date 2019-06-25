@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FaEnvelope, FaPhone } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { ContactContext } from '../../context/contact';
+import { ContactContext } from '../../context';
 
 function ContactsItem({ contact }) {
   const { id, name, email, phone, type } = contact;

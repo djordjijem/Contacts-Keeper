@@ -1,2 +1,2 @@
-export { AuthState } from './authState';
+export { AuthState } from './AuthState';
 export { AuthContext } from './authContext';

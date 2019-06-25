@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ContactContext } from '../../context/contact';
+import { ContactContext } from '../../context';
 import { ContactsItem } from './ContactsItem';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 

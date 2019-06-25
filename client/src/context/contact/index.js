@@ -1,2 +1,2 @@
-export { ContactState } from './contactState';
+export { ContactState } from './ContactState';
 export { ContactContext } from './contactContext';
