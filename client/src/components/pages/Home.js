@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Contacts, ContactsForm, ContactFilter } from '../contacts';
+import { AuthContext } from '../../context';
 
 function Home() {
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    authContext.loadUser();
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <div className='grid-2'>
       <div>

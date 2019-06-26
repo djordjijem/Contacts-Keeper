@@ -2,7 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar, Home, About, Register, Login, Alerts } from './components';
 import { ContactState, AuthState, AlertState } from './context';
+import { setAuthToken } from './utils';
 import './App.css';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
   return (

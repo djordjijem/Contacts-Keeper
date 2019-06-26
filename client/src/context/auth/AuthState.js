@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
 import axios from 'axios';
 import { AuthContext } from './authContext';
 import authReducer from './authReducer';
+import { setAuthToken } from '../../utils';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -26,9 +26,22 @@ function AuthState(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   //Load user
+  async function loadUser() {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    try {
+      const res = await axios.get('/api/auth');
+
+      dispatch({ type: USER_LOADED, payload: res.data });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
+    }
+  }
 
   //Register user
-  async function register(formData) {
+  async function registerUser(formData) {
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -42,6 +55,8 @@ function AuthState(props) {
         type: REGISTER_SUCCESS,
         payload: res.data
       });
+
+      loadUser();
     } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
@@ -61,7 +76,7 @@ function AuthState(props) {
 
   //Clear errors
   function clearErrors() {
-    console.log('clearErrors');
+    dispatch({ type: CLEAR_ERRORS });
   }
 
   return (
@@ -72,7 +87,7 @@ function AuthState(props) {
         loading: state.loading,
         user: state.user,
         error: state.error,
-        register,
+        registerUser,
         login,
         logout,
         clearErrors
