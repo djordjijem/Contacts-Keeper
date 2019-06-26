@@ -91,7 +91,7 @@ function AuthState(props) {
   }
   //Logout
   function logout() {
-    console.log('logout');
+    dispatch({ type: LOGOUT });
   }
 
   //Clear errors
@@ -110,6 +110,7 @@ function AuthState(props) {
         registerUser,
         login,
         logout,
+        loadUser,
         clearErrors
       }}
     >
