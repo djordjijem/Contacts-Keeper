@@ -6,7 +6,7 @@ function Home() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    authContext.loadUser();
+    authContext.login();
     //eslint-disable-next-line
   }, []);
 
