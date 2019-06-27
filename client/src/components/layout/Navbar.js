@@ -9,9 +9,11 @@ const Navbar = ({ title }) => {
   const contactContext = useContext(ContactContext);
 
   const { isAuthenticated, logout, user } = authContext;
+  const { clearContacts } = contactContext;
 
   function onLogout() {
     logout();
+    clearContacts();
   }
 
   const authLinks = (
@@ -42,7 +44,10 @@ const Navbar = ({ title }) => {
 
   return (
     <div className='navbar bg-primary'>
-      <h1>{title}</h1>
+      <h1>
+        <FaIdCardAlt />
+        {title}
+      </h1>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );

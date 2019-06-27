@@ -1,10 +1,11 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
 import axios from 'axios';
 import { ContactContext } from './contactContext';
 import ContactReducer from './contactReducer';
 import {
   ADD_CONTACT,
+  GET_CONTACTS,
+  CLEAR_CONTACTS,
   DELETE_CONTACT,
   SET_CURRENT,
   CLEAR_CURRENT,
@@ -16,7 +17,7 @@ import {
 
 function ContactState(props) {
   const initialState = {
-    contacts: [],
+    contacts: null,
     current: null,
     filtered: null,
     error: null
@@ -42,11 +43,23 @@ function ContactState(props) {
     }
   }
   //Delete contact
-  function deleteContact(id) {
-    dispatch({
-      type: DELETE_CONTACT,
-      payload: id
-    });
+  async function deleteContact(id) {
+    try {
+      await axios.delete(`/api/contacts/${id}`);
+
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg
+      });
+    }
+  }
+  function clearContacts() {
+    dispatch({ type: CLEAR_CONTACTS });
   }
 
   //Set current contact
@@ -65,13 +78,42 @@ function ContactState(props) {
   }
 
   //Update contact
-  function updateContact(contact) {
-    dispatch({
-      type: UPDATE_CONTACT,
-      payload: contact
-    });
+  async function updateContact(contact) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    try {
+      const res = await axios.put(
+        `/api/contacts/${contact._id}`,
+        contact,
+        config
+      );
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({ type: CONTACT_ERROR, payload: err.response.msg });
+    }
   }
+  //get contacts
+  async function getContacts() {
+    try {
+      const res = await axios.get('/api/contacts');
 
+      dispatch({
+        type: GET_CONTACTS,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg
+      });
+    }
+  }
   //Filter contacts
   function filterContacts(text) {
     dispatch({
@@ -99,7 +141,9 @@ function ContactState(props) {
         setCurrent,
         clearCurrent,
         updateContact,
+        getContacts,
         filterContacts,
+        clearContacts,
         clearFilter
       }}
     >
