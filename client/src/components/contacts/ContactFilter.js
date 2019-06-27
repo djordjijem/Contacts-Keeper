@@ -10,7 +10,7 @@ function ContactFilter() {
     if (filtered === null) {
       text.current.value = '';
     }
-  });
+  }, [filtered]);
 
   function onChange(e) {
     if (text.current.value !== '') {
