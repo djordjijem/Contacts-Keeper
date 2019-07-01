@@ -4,7 +4,7 @@ import { FaIdCardAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext, ContactContext } from '../../context';
 
-const Navbar = ({ title }) => {
+function Navbar({ title }) {
   const authContext = useContext(AuthContext);
   const contactContext = useContext(ContactContext);
 
@@ -51,7 +51,7 @@ const Navbar = ({ title }) => {
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );
-};
+}
 
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
